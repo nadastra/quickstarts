@@ -13,6 +13,6 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.16.5"
+    "lodash": "^4.17.20"
   }
 }
