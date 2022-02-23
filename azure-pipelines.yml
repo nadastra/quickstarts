@@ -40,6 +40,10 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: $(System.DefaultWorkingDirectory)/hello-kubernetes/deploy/**
+        artifactName: manifests
           
 
 - stage: Deploy
@@ -63,12 +67,15 @@ stages:
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
+          - download: current
+            artifact: manifests
+            
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
               manifests: |
-                $(System.DefaultWorkingDirectory)/hello-kubernetes/deploy/node.yaml
+                $(Pipeline.Workspace)/manifests/node.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
