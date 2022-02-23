@@ -5,6 +5,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const isEmpty = require('lodash.isempty');
 require('isomorphic-fetch');
 
 const app = express();
@@ -14,11 +15,11 @@ app.use(bodyParser.json());
 const daprPort = process.env.DAPR_HTTP_PORT; 
 const daprGRPCPort = process.env.DAPR_GRPC_PORT;
 
-const stateStoreName = `statestore`;
-const stateUrl = `http://localhost:${daprPort}/v1.0/state/${stateStoreName}`;
+//const stateStoreName = `statestore`;
+//const stateUrl = `http://localhost:${daprPort}/v1.0/state/${stateStoreName}`;
 const port = 3000;
 
-app.get('/order', (_req, res) => {
+/*app.get('/order', (_req, res) => {
     fetch(`${stateUrl}/order`)
         .then((response) => {
             if (!response.ok) {
@@ -32,9 +33,13 @@ app.get('/order', (_req, res) => {
             console.log(error);
             res.status(500).send({message: error});
         });
+});*/
+
+app.get('/echo', (_req, res) => {  
+        res.status(200).send({message: `hey there!`});    
 });
 
-app.post('/neworder', (req, res) => {
+/*app.post('/neworder', (req, res) => {
     const data = req.body.data;
     const orderId = data.orderId;
     console.log("Got a new order! Order ID: " + orderId);
@@ -61,6 +66,18 @@ app.post('/neworder', (req, res) => {
         console.log(error);
         res.status(500).send({message: error});
     });
+});*/
+
+app.post('/echo', (req, res) => {
+    
+    if (isEmpty(req.body) || !req.body.message) {
+        res.status(500).send({message: "nothing to echo back"});
+    }
+    const message = req.body.message;
+    console.log("Got a message: " + message);
+    
+    res.status(200).send({message: `echo ${message}`});
+   
 });
 
 app.get('/ports', (_req, res) => {
