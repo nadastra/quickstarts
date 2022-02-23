@@ -67,7 +67,7 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/hello-kubernetes/deploy/node.yaml
+                $(Pipeline.Workspace)/**/hello-kubernetes/deploy/node.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
