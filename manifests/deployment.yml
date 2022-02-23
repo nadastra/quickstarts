@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: echoservicenodejs 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echoservicenodejs
+  template:
+    metadata:
+      labels:
+        app: echoservicenodejs 
+    spec:
+      containers:
+        - name: echoservicenodejs 
+          image: acrparveenkumar.azurecr.io/echoservicenodejs
+          ports:
+          - containerPort: 80
