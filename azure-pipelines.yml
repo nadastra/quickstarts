@@ -42,7 +42,7 @@ stages:
           $(tag)
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: $(System.DefaultWorkingDirectory)/hello-kubernetes/deploy/**
+        targetPath: $(System.DefaultWorkingDirectory)/hello-kubernetes/deploy
         artifactName: manifests
           
 
