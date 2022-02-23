@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: dapriosamples/hello-k8s-node:latest
+        image: acrparveenkumar.azurecr.io/echoservicenodejs:latest
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
