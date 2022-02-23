@@ -41,11 +41,6 @@ stages:
         tags: |
           $(tag)
           
-    - task: CopyFiles@2
-      displayName: 'Copy k8s manifests'
-      inputs:
-        contents: 'hello-kubernetes/deploy/**'
-        targetFolder: '$(Agent.BuildDirectory)'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -73,7 +68,7 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/hello-kubernetes/deploy/node.yaml
+                $(System.DefaultWorkingDirectory)/hello-kubernetes/deploy/node.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
