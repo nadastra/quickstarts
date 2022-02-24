@@ -7,10 +7,10 @@ const express = require('express');
 const app = express();
 
 // These ports are injected automatically into the container.
-const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
+const daprPort = process.env.DAPR_HTTP_PORT || 3501; 
 const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 
-const port = 3000;
+const port = 3001;
 
 app.get('/time', (_req, res) => {  
         let date = new Date();
