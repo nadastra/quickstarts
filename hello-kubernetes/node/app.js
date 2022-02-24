@@ -15,8 +15,9 @@ app.use(bodyParser.json());
 const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
 const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 
-//const stateStoreName = `statestore`;
-//const stateUrl = `http://localhost:${daprPort}/v1.0/state/${stateStoreName}`;
+const methodName = `time`;
+//const timemsUrl = `http://localhost:${daprPort}/v1.0/invoke/nodems/method/${methodname}`; one way to invoke
+const timemsUrl = `http://dapr-app-id:nodems@localhost:${daprPort}/${methodname}`; another way to invoke
 const port = 3000;
 
 /*app.get('/order', (_req, res) => {
@@ -35,8 +36,20 @@ const port = 3000;
         });
 });*/
 
-app.get('/echo', (_req, res) => {  
-        res.status(200).send({message: "hey there!"});    
+app.get('/echo', (_req, res) => {
+        //get time to echo back
+        let ctime ='';
+        fetch(`${timemsUrl}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw "Could not get time.";
+            }
+            let ctime = response.body.time;
+        }).catch((error) => {
+            console.log(error);
+            res.status(500).send({message: error});
+        });
+        res.status(200).send({message: "echo back time after time: " + ctime});    
 });
 
 /*app.post('/neworder', (req, res) => {
