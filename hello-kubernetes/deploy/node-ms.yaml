@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodems
+  labels:
+    app: node-ms
+spec:
+  selector:
+    app: node-ms
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodems
+  labels:
+    app: node-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-ms
+  template:
+    metadata:
+      labels:
+        app: node-ms
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "nodems"
+        dapr.io/app-port: "3000"
+        dapr.io/config: tracing
+    spec:
+      containers:
+      - name: nodems
+        image: acrparveenkumar.azurecr.io/timemsnodejs:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
