@@ -15,9 +15,9 @@ app.use(bodyParser.json());
 const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
 const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 
-const methodName = `time`;
-//const timemsUrl = `http://localhost:${daprPort}/v1.0/invoke/nodems/method/${methodname}`; one way to invoke
-const timemsUrl = `http://dapr-app-id:nodems@localhost:${daprPort}/${methodname}`; another way to invoke
+const methodName = 'time';
+//const timemsUrl = `http://localhost:${daprPort}/v1.0/invoke/nodems/method/${methodName}`; one way to invoke
+const timemsUrl = `http://dapr-app-id:nodems@localhost:${daprPort}/${methodName}`; //another way to invoke
 const port = 3000;
 
 /*app.get('/order', (_req, res) => {
