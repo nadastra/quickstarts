@@ -9,7 +9,7 @@ spec:
     app: node-ms
   ports:
   - protocol: TCP
-    port: 80
+    port: 81
     targetPort: 3000
   type: LoadBalancer
 
