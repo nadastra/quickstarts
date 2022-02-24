@@ -5,7 +5,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const isEmpty = require('lodash.isempty');
+const isEmpty = require('lodash/isEmpty');
 require('isomorphic-fetch');
 
 const app = express();
@@ -36,7 +36,7 @@ const port = 3000;
 });*/
 
 app.get('/echo', (_req, res) => {  
-        res.status(200).send({message: `hey there!`});    
+        res.status(200).send({message: "hey there!"});    
 });
 
 /*app.post('/neworder', (req, res) => {
