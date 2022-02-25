@@ -9,8 +9,8 @@ spec:
     app: time-ms
   ports:
   - protocol: TCP
-    port: 81
-    targetPort: 3001
+    port: 80
+    targetPort: 3000
   type: LoadBalancer
 
 ---
@@ -32,12 +32,12 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "timems"
-        dapr.io/app-port: "3001"
+        dapr.io/app-port: "3000"
         dapr.io/config: tracing
     spec:
       containers:
       - name: nodems
         image: acrparveenkumar.azurecr.io/timemsnodejs:latest
         ports:
-        - containerPort: 3001
+        - containerPort: 3000
         imagePullPolicy: Always
