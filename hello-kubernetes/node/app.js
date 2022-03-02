@@ -6,10 +6,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const isEmpty = require('lodash/isEmpty');
+const cors = require('cors');
 require('isomorphic-fetch');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors({origin: 'http://wildflycontainerqs-75cb78889c-hxqnc.af302b6b0eae45b58299.australiaeast.aksapp.io'}));
 
 // These ports are injected automatically into the container.
 const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
