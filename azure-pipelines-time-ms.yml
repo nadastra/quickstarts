@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'fd757f52-beae-422c-81f3-2e8acf50d8a7'
   imageRepository: 'timemsnodejs'
   containerRegistry: 'acrparveenkumar.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '**/hello-kubernetes/node-ms/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'acrparveenkumar12388cfc-auth'
 
