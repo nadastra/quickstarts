@@ -3,14 +3,14 @@ apiVersion: v1
 metadata:
   name: timems
   labels:
-    app: time-ms
+    app: timems
 spec:
   selector:
-    app: time-ms
+    app: timems
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 3000
+    port: 81
+    targetPort: 3001
   type: LoadBalancer
 
 ---
@@ -19,25 +19,25 @@ kind: Deployment
 metadata:
   name: timems
   labels:
-    app: time-ms
+    app: timems
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: time-ms
+      app: timems
   template:
     metadata:
       labels:
-        app: time-ms
+        app: timems
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "timems"
-        dapr.io/app-port: "3000"
+        dapr.io/app-port: "3001"
         dapr.io/config: tracing
     spec:
       containers:
       - name: nodems
         image: acrparveenkumar.azurecr.io/timemsnodejs:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 3001
         imagePullPolicy: Always
