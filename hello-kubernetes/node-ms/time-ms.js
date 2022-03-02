@@ -10,7 +10,7 @@ const app = express();
 const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
 const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 
-const port = 3000;
+const port = 3001;
 
 app.get('/time', (_req, res) => {  
         let date = new Date();
