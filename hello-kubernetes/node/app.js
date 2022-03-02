@@ -19,7 +19,7 @@ const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 
 const methodName = 'time';
 //const timemsUrl = `http://localhost:${daprPort}/v1.0/invoke/nodems/method/${methodName}`; one way to invoke
-const timemsUrl = `http://dapr-app-id:timems@localhost:${daprPort}/${methodName}`; //another way to invoke
+//const timemsUrl = `http://dapr-app-id:timems@localhost:${daprPort}/${methodName}`; //another way to invoke
 const port = 3000;
 
 /*app.get('/order', (_req, res) => {
@@ -42,10 +42,10 @@ app.get('/echo', (_req, res) => {
         console.log("Got a /get on nodeapp");
         //get time to echo back
         let ctime ='';
-        fetch(`${timemsUrl}`)
+        fetch(`http://dapr-app-id:timems@localhost:${daprPort}/${methodName}`)
         .then((response) => {
             if (response.status !== 200) {
-                res.status(500).send({message: response.status});
+                res.status(500).send({message: response.status + ":" + response.statusText});
             }
             return response.json();
         })
