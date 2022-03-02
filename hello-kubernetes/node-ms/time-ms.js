@@ -17,7 +17,7 @@ app.get('/time', (_req, res) => {
         let hours = date.getHours();
         let mins = date.getMinutes();
         let secs = date.getSeconds();
-        let ctime = hours + ":" + mins + ":" + secs;
+        let ctime = hours + "h:" + mins + "m:" + secs + "s";
         console.log ("current time: " + ctime);
         res.status(200).send({time: ctime});    
 });
