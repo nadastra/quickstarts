@@ -44,16 +44,20 @@ app.get('/echo', (_req, res) => {
         let ctime ='';
         fetch(`${timemsUrl}`)
         .then((response) => {
-            if (!response.ok) {
-                throw "Could not get time.";
+            if (response.status !== 200) {
+                res.status(500).send({message: response.status});
             }
-            let ctime = response.body.time;
-            console.log("Got time from timems: " + ctime);
-        }).catch((error) => {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            res.status(200).send({message: "echo back time after time: " + data.time});  
+        })
+        .catch((error) => {
             console.log(error);
             res.status(500).send({message: error});
         });
-        res.status(200).send({message: "echo back time after time: " + ctime});    
+          
 });
 
 /*app.post('/neworder', (req, res) => {
