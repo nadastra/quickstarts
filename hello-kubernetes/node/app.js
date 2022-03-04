@@ -20,7 +20,7 @@ const daprGRPCPort = process.env.DAPR_GRPC_PORT || 50001;
 const methodName = 'time';
 //const timemsUrl = `http://localhost:${daprPort}/v1.0/invoke/nodems/method/${methodName}`; one way to invoke
 //const timemsUrl = `http://dapr-app-id:timems@localhost:${daprPort}/${methodName}`; //another way to invoke
-//const sbAppUrl = `http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/hello`; //another way to invoke
+//const sbAppUrl = `http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/wildflyspringbootdemo/hello`; //another way to invoke
 const port = 3000;
 
 /*app.get('/order', (_req, res) => {
@@ -82,7 +82,7 @@ app.get('/echo', (_req, res) => {
             res.status(500).send({message: error});
         });
     
-    //fetch from back-end now
+    //fetch from back-end now; return with time from timems call above
     fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/hello/world`)
         .then((response) => {
             if (response.status !== 200) {
@@ -92,7 +92,7 @@ app.get('/echo', (_req, res) => {
         })
         .then(function(data) {
             console.log("backend response: " + data);            
-            res.status(200).send({message: `echo @ ${ctime}: ` + data});  
+            res.status(200).send({message: `echo @ ${ctime}: ` + data.message});  
         })
         .catch((error) => {
             console.log(error);
