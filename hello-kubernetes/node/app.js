@@ -23,44 +23,6 @@ const methodName = 'time';
 //const sbAppUrl = `http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/wildflyspringbootdemo/hello`; //another way to invoke
 const port = 3000;
 
-/*app.get('/order', (_req, res) => {
-    fetch(`${stateUrl}/order`)
-        .then((response) => {
-            if (!response.ok) {
-                throw "Could not get state.";
-            }
-
-            return response.text();
-        }).then((orders) => {
-            res.send(orders);
-        }).catch((error) => {
-            console.log(error);
-            res.status(500).send({message: error});
-        });
-});*/
-
-/*app.get('/echo', (_req, res) => {
-        console.log("Got a /get on nodeapp");
-        //get time to echo back
-        let ctime ='';
-        fetch(`http://dapr-app-id:timems@localhost:${daprPort}/${methodName}`)
-        .then((response) => {
-            if (response.status !== 200) {
-                res.status(500).send({message: response.status + ":" + response.statusText});
-            }
-            return response.json();
-        })
-        .then(function(data) {
-            console.log(data);
-            res.status(200).send({message: "echo back time after time: " + data.time});  
-        })
-        .catch((error) => {
-            console.log(error);
-            res.status(500).send({message: error});
-        });
-          
-});*/
-
 app.get('/echo', (_req, res) => {
         console.log("Got a /get on nodeapp");
         //get time to echo back
@@ -82,8 +44,15 @@ app.get('/echo', (_req, res) => {
             res.status(500).send({message: error});
         });
     
+    var bearer = _req.header('Authorization');
+    var headers = new Headers();    
+    headers.append("Authorization", bearer);
+    var options = {
+         method: "GET",
+         headers: headers
+    };
     //fetch from back-end now; return with time from timems call above
-    fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/wildflyspringbootdemo/hello/world`)
+    fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/wildflyspringbootdemo/hello/world`, options)
         .then((response) => {
             if (response.status !== 200) {
                 res.status(500).send({message: "from backend: " + response.status + ":" + response.statusText});
