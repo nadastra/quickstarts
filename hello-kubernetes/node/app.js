@@ -11,7 +11,7 @@ require('isomorphic-fetch');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({origin: 'http://wildflycontainerqs.af302b6b0eae45b58299.australiaeast.aksapp.io'}));
+app.use(cors({origin: 'https://wildflycontainerqs.af302b6b0eae45b58299.australiaeast.aksapp.io'}));
 
 // These ports are injected automatically into the container.
 const daprPort = process.env.DAPR_HTTP_PORT || 3500; 
