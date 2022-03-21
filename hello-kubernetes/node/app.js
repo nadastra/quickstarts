@@ -52,7 +52,7 @@ app.get('/echo', (_req, res) => {
          headers: headers
     };
     //fetch from back-end now; return with time from timems call above
-    fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/wildflyspringbootdemo/hello/world`, options)
+    fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/hello/world`, options)
         .then((response) => {
             if (response.status !== 200) {
                 res.status(500).send({message: "from backend: " + response.status + ":" + response.statusText});
