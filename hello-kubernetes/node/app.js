@@ -44,7 +44,7 @@ app.get('/echo', (_req, res) => {
             res.status(500).send({message: error});
         });
     
-    var bearer = _req.headers('authorization');
+    var bearer = _req.headers.authorization;
     var headers = new Headers();    
     headers.append("Authorization", bearer);
     var options = {
