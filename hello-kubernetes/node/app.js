@@ -52,7 +52,8 @@ app.get('/echo', (_req, res) => {
          headers: headers
     };
     //fetch from back-end now; return with time from timems call above
-    fetch(`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/hello/world`, options)
+    const backendapp = 'http://wildflyspringboot.af302b6b0eae45b58299.australiaeast.aksapp.io/hello/world';//`http://dapr-app-id:wildflyspringbootdemo@localhost:${daprPort}/hello/world`
+    fetch(backendapp, options)
         .then((response) => {
             if (response.status !== 200) {
                 res.status(500).send({message: "from backend: " + response.status + ":" + response.statusText});
